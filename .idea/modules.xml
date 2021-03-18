@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/authserver/authserver.iml" filepath="$PROJECT_DIR$/authserver/authserver.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/bactwo.iml" filepath="$PROJECT_DIR$/.idea/bactwo.iml" />
       <module fileurl="file://$PROJECT_DIR$/todolistserver/todolistserver.iml" filepath="$PROJECT_DIR$/todolistserver/todolistserver.iml" />
     </modules>

@@ -4,6 +4,7 @@
     <option name="originalFiles">
       <list>
         <option value="$PROJECT_DIR$/todolistserver/pom.xml" />
+        <option value="$PROJECT_DIR$/authserver/pom.xml" />
       </list>
     </option>
   </component>
