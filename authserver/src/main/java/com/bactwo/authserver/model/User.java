@@ -3,9 +3,10 @@ package com.bactwo.authserver.model;
 
 import javax.persistence.*;
 import java.util.Collection;
+import java.util.Set;
 
 @Entity
-@Table
+@Table(name = "users")
 public class User {
 
     @Id
@@ -18,6 +19,9 @@ public class User {
     @Column
     private String password;
 
+    @Column
+    private boolean active;
+
     @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinTable(
             name = "users_roles",
@@ -28,19 +32,15 @@ public class User {
     public User() {
     }
 
-    public User(String userName, String password, Collection<Role> roles) {
-        super();
+    public User(String userName, String password, boolean active, Collection<Role> roles) {
         this.userName = userName;
         this.password = password;
+        this.active = active;
         this.roles = roles;
     }
 
     public Long getId() {
         return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
     }
 
     public String getUserName() {
@@ -57,6 +57,14 @@ public class User {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public boolean isActive() {
+        return active;
+    }
+
+    public void setActive(boolean active) {
+        this.active = active;
     }
 
     public Collection<Role> getRoles() {

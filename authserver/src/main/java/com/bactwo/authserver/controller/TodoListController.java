@@ -1,8 +1,8 @@
-package com.bactwo.todolistserver.controller;
+package com.bactwo.authserver.controller;
 
-import com.bactwo.todolistserver.dto.TodoItemDTO;
-import com.bactwo.todolistserver.service.TodoItemService;
-import com.bactwo.todolistserver.service.TodoItemServiceImpl;
+import com.bactwo.authserver.dto.TodoItemDTO;
+import com.bactwo.authserver.service.TodoListService;
+import com.bactwo.authserver.service.TodoListServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -13,23 +13,23 @@ import java.util.Arrays;
 import java.util.List;
 
 @RestController
-@RequestMapping("/resource/v1/todolist")
-public class TodoListRestController {
+@RequestMapping("/user/todolist")
+public class TodoListController {
 
-    private final TodoItemService todoItemService;
+    private final TodoListService todoListService;
 
     @Autowired
-    public TodoListRestController(TodoItemServiceImpl todoItemService) {
-        this.todoItemService = todoItemService;
+    public TodoListController( TodoListServiceImpl todoListServiceImpl) {
+        this.todoListService = todoListServiceImpl;
     }
 
-    @PostMapping ( "/new")
+    @PostMapping( "/new")
     public ResponseEntity<TodoItemDTO> createNewTodoItem (@RequestBody String task) {
         HttpHeaders headers = new HttpHeaders();
         try {
-            TodoItemDTO todoItemDTO = todoItemService.createNewTodoItem(task);
-             if(todoItemDTO != null) return new ResponseEntity<>(todoItemDTO, headers, HttpStatus.CREATED);
-             else return new ResponseEntity<>(null, headers, HttpStatus.INTERNAL_SERVER_ERROR);
+            TodoItemDTO todoItemDTO = todoListService.createNewTodoItem(task);
+            if(todoItemDTO != null) return new ResponseEntity<>(todoItemDTO, headers, HttpStatus.CREATED);
+            else return new ResponseEntity<>(null, headers, HttpStatus.INTERNAL_SERVER_ERROR);
         } catch (Exception e) {
             System.out.println(Arrays.toString(e.getStackTrace()));
             return new ResponseEntity<>(null, headers, HttpStatus.BAD_REQUEST);
@@ -40,7 +40,7 @@ public class TodoListRestController {
     public ResponseEntity<TodoItemDTO> getTodoItem (@PathVariable Long id) {
         HttpHeaders headers = new HttpHeaders();
         try {
-            TodoItemDTO todoItemDTO = todoItemService.getTodoItem(id);
+            TodoItemDTO todoItemDTO = todoListService.getTodoItem(id);
             if(todoItemDTO != null) return new ResponseEntity<>(todoItemDTO, headers, HttpStatus.OK);
             else return new ResponseEntity<>(null, headers, HttpStatus.INTERNAL_SERVER_ERROR);
         } catch (Exception e) {
@@ -53,7 +53,7 @@ public class TodoListRestController {
     public ResponseEntity<List<TodoItemDTO>> getAllTodoItems () {
         HttpHeaders headers = new HttpHeaders();
         try {
-            List<TodoItemDTO> allTodoItemDTOs = todoItemService.getAllTodoItems();
+            List<TodoItemDTO> allTodoItemDTOs = todoListService.getAllTodoItems();
             if(allTodoItemDTOs != null) return new ResponseEntity<>(allTodoItemDTOs, headers, HttpStatus.OK);
             else return new ResponseEntity<>(null, headers, HttpStatus.INTERNAL_SERVER_ERROR);
         } catch (Exception e) {
@@ -66,7 +66,7 @@ public class TodoListRestController {
     public ResponseEntity<Boolean> updateTodoItem (@RequestBody TodoItemDTO todoItemDTO) {
         HttpHeaders headers = new HttpHeaders();
         try {
-            boolean updateSucceeded = todoItemService.updateTodoItemTask(todoItemDTO);
+            boolean updateSucceeded = todoListService.updateTodoItem(todoItemDTO);
             if(updateSucceeded) return new ResponseEntity<>(true, headers, HttpStatus.OK);
             else return new ResponseEntity<>(false, headers, HttpStatus.INTERNAL_SERVER_ERROR);
         } catch (Exception e) {
@@ -79,7 +79,7 @@ public class TodoListRestController {
     public ResponseEntity<Boolean> completeTodoItem (@PathVariable Long id) {
         HttpHeaders headers = new HttpHeaders();
         try {
-            boolean completionSucceeded = todoItemService.completeTodoItem(id);
+            boolean completionSucceeded = todoListService.completeTodoItem(id);
             if(completionSucceeded) return new ResponseEntity<>(true, headers, HttpStatus.OK);
             else return new ResponseEntity<>(false, headers, HttpStatus.INTERNAL_SERVER_ERROR);
         } catch (Exception e) {
@@ -92,7 +92,7 @@ public class TodoListRestController {
     public ResponseEntity<Boolean> deleteTodoItem (@PathVariable Long id) {
         HttpHeaders headers = new HttpHeaders();
         try {
-            boolean deletionSucceeded = todoItemService.deleteTodoItem(id);
+            boolean deletionSucceeded = todoListService.deleteTodoItem(id);
             if(deletionSucceeded) return new ResponseEntity<>(true, headers, HttpStatus.OK);
             else return new ResponseEntity<>(false, headers, HttpStatus.INTERNAL_SERVER_ERROR);
         } catch (Exception e) {
@@ -100,4 +100,6 @@ public class TodoListRestController {
             return new ResponseEntity<>(false, headers, HttpStatus.BAD_REQUEST);
         }
     }
+
+
 }

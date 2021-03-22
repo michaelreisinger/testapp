@@ -20,14 +20,9 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     @Autowired
     private UserService userService;
 
-    @Autowired
-    public SecurityConfiguration(UserServiceImpl userService) {
-        this.userService = userService;
-    }
-
     @Bean
     public BCryptPasswordEncoder passwordEncoder() {
-        return new BCryptPasswordEncoder(10);
+        return new BCryptPasswordEncoder();
     }
 
     @Bean
@@ -47,19 +42,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http
                 .authorizeRequests()
-                .antMatchers("", "/", "index", "/index",
-                        "/registration**", "/js/**", "/css/**", "/img/**").permitAll()
-                .anyRequest().authenticated()
-                .and()
-                .formLogin()
-                .loginPage("/login")
-                .permitAll()
-                .and()
-                .logout()
-                .invalidateHttpSession(true)
-                .clearAuthentication(true)
-                .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
-                .logoutSuccessUrl("/login?logout")
-                .permitAll();
+                .antMatchers("/user/**").hasAnyRole("ADMIN", "USER")
+                .antMatchers("/").permitAll()
+                .and().formLogin();
     }
 }
