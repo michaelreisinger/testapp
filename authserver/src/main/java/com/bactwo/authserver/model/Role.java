@@ -1,10 +1,12 @@
 package com.bactwo.authserver.model;
 
+import org.springframework.security.core.GrantedAuthority;
+
 import javax.persistence.*;
 
 @Entity
 @Table(name = "roles")
-public class Role {
+public class Role implements GrantedAuthority {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -35,4 +37,10 @@ public class Role {
     public String toString() {
         return "Role [id=" + id + ", name=" + name + "]";
     }
+
+    @Override
+    public String getAuthority() {
+        return this.getName();
+    }
+
 }

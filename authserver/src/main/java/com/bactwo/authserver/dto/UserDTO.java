@@ -15,7 +15,7 @@ public class UserDTO implements UserDetails {
     private String userName;
     private String password;
     private boolean active;
-    private List<Role> authorities;
+    private Collection<Role> authorities;
 
     public UserDTO() { }
 
@@ -61,7 +61,7 @@ public class UserDTO implements UserDetails {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return (Collection<? extends GrantedAuthority>) authorities;
+        return authorities;
     }
 
     @Override

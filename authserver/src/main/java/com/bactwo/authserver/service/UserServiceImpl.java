@@ -15,13 +15,14 @@ import org.springframework.stereotype.Service;
 
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
 public class UserServiceImpl implements UserService {
 
-    private UserRepository userRepository;
+    private final UserRepository userRepository;
 
     @Autowired
     private BCryptPasswordEncoder passwordEncoder;
@@ -32,11 +33,12 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User save(UserDTO registrationDTO) {
+        String userRole = "ROLE_USER";
         User user =
                 new User(registrationDTO.getUserName(),
                         passwordEncoder.encode(registrationDTO.getPassword()),
                         registrationDTO.isActive(),
-                        Arrays.asList(new Role("ROLE_USER")));
+                        Collections.singletonList(new Role(userRole)));
         return userRepository.save(user);
     }
 
@@ -46,7 +48,8 @@ public class UserServiceImpl implements UserService {
 
         user.orElseThrow(() -> new UsernameNotFoundException("Not found: " + userName));
 
-        return user.map(UserDTO::new).get();
+        return new org.springframework.security.core.userdetails.User(user.get().getUserName(),
+                user.get().getPassword(), mapRolesToAuthorities(user.get().getRoles()));
     }
 
     private Collection<? extends GrantedAuthority> mapRolesToAuthorities(Collection<Role> roles){
