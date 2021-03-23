@@ -6,6 +6,8 @@ import java.util.List;
 
 public interface TodoListService {
 
+    String test();
+
     TodoItemDTO createNewTodoItem (String task) throws Exception;
 
     TodoItemDTO getTodoItem (Long id) throws Exception;

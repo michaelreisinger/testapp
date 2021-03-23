@@ -1,23 +1,15 @@
 package com.bactwo.authserver.service;
 
 import com.bactwo.authserver.dto.UserDTO;
-import com.bactwo.authserver.model.Role;
 import com.bactwo.authserver.model.User;
 import com.bactwo.authserver.repository.UserRepository;
-import com.bactwo.authserver.security.SecurityConfiguration;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.Collections;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -38,7 +30,7 @@ public class UserServiceImpl implements UserService {
                 new User(registrationDTO.getUserName(),
                         passwordEncoder.encode(registrationDTO.getPassword()),
                         registrationDTO.isActive(),
-                        Collections.singletonList(new Role(userRole)));
+                        registrationDTO.getAuthorities().toString());
         return userRepository.save(user);
     }
 
@@ -48,13 +40,7 @@ public class UserServiceImpl implements UserService {
 
         user.orElseThrow(() -> new UsernameNotFoundException("Not found: " + userName));
 
-        return new org.springframework.security.core.userdetails.User(user.get().getUserName(),
-                user.get().getPassword(), mapRolesToAuthorities(user.get().getRoles()));
+        return user.map(UserDTO::new).get();
     }
 
-    private Collection<? extends GrantedAuthority> mapRolesToAuthorities(Collection<Role> roles){
-
-        return roles.stream().map(role -> new SimpleGrantedAuthority(role.getName())).collect(Collectors.toList());
-
-    }
 }

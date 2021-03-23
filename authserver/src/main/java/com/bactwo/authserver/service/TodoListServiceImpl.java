@@ -24,6 +24,13 @@ public class TodoListServiceImpl implements TodoListService {
         this.resourceAPI = resourceAPI;
     }
 
+    @Override
+    public String test() {
+        String path = "/test";
+        return resourceAPI.getRemoteEntity(resourceLocation, path, String.class).getBody();
+    }
+
+    @Override
     public TodoItemDTO createNewTodoItem (String task) throws Exception {
         String path = "/new";
         ResponseEntity<TodoItemDTO> response = resourceAPI.exchangeRemotePostOrPut(resourceLocation, path,
@@ -31,6 +38,7 @@ public class TodoListServiceImpl implements TodoListService {
         return response.getBody();
     }
 
+    @Override
     public TodoItemDTO getTodoItem (Long id) throws Exception {
         String path = "/todo/" + id.toString();
         ResponseEntity<TodoItemDTO> response = resourceAPI.getRemoteEntity(resourceLocation,
@@ -38,6 +46,7 @@ public class TodoListServiceImpl implements TodoListService {
         return response.getBody();
     }
 
+    @Override
     public List<TodoItemDTO> getAllTodoItems () throws Exception {
         String path = "/all";
         ResponseEntity<ListOfTodoItemsDTO> response = resourceAPI.getRemoteEntity(resourceLocation, path,
@@ -45,6 +54,7 @@ public class TodoListServiceImpl implements TodoListService {
         return  Objects.requireNonNull(response.getBody()).getTodoItemDTOList();
     }
 
+    @Override
     public Boolean updateTodoItem (TodoItemDTO todoItemDTO) throws Exception {
         String path = "/update";
         ResponseEntity<Boolean> response = resourceAPI.exchangeRemotePostOrPut(resourceLocation, path, HttpMethod.PUT,
@@ -52,6 +62,7 @@ public class TodoListServiceImpl implements TodoListService {
         return response.getBody();
     }
 
+    @Override
     public Boolean completeTodoItem (Long id) throws Exception {
         String path = "/complete/" + id.toString();
         ResponseEntity<Boolean> response = resourceAPI.exchangeRemotePostOrPut(resourceLocation, path, HttpMethod.PUT,
@@ -59,6 +70,7 @@ public class TodoListServiceImpl implements TodoListService {
         return response.getBody();
     }
 
+    @Override
     public Boolean deleteTodoItem (Long id)  throws Exception {
         String path = "/delete/" + id.toString();
         ResponseEntity<Boolean> response = resourceAPI.exchangeRemoteGetOrDelete(resourceLocation, path,

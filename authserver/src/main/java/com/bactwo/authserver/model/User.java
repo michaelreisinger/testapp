@@ -22,17 +22,13 @@ public class User {
     @Column
     private boolean active;
 
-    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    @JoinTable(
-            name = "users_roles",
-            joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"),
-            inverseJoinColumns = @JoinColumn(name = "role_id", referencedColumnName = "id"))
-    private Collection<Role> roles;
+   @Column
+   private String roles;
 
     public User() {
     }
 
-    public User(String userName, String password, boolean active, Collection<Role> roles) {
+    public User(String userName, String password, boolean active, String roles) {
         this.userName = userName;
         this.password = password;
         this.active = active;
@@ -67,11 +63,11 @@ public class User {
         this.active = active;
     }
 
-    public Collection<Role> getRoles() {
+    public String getRoles() {
         return roles;
     }
 
-    public void setRoles(Collection<Role> roles) {
+    public void setRoles(String roles) {
         this.roles = roles;
     }
 }

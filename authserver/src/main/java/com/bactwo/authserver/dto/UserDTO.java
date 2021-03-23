@@ -1,21 +1,23 @@
 package com.bactwo.authserver.dto;
 
 
-import com.bactwo.authserver.model.Role;
 import com.bactwo.authserver.model.User;
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class UserDTO implements UserDetails {
 
     private String userName;
     private String password;
     private boolean active;
-    private Collection<Role> authorities;
+    private List<GrantedAuthority> authorities;
 
     public UserDTO() { }
 
@@ -23,7 +25,10 @@ public class UserDTO implements UserDetails {
         this.userName = user.getUserName();
         this.password = user.getPassword();
         this.active = user.isActive();
-        this.authorities = new ArrayList<>(user.getRoles());
+        this.authorities =
+                Arrays.stream(user.getRoles().split(","))
+                .map(SimpleGrantedAuthority::new)
+                .collect(Collectors.toList());
     }
 
     public void setUserName(String userName) {
@@ -55,7 +60,7 @@ public class UserDTO implements UserDetails {
         return active;
     }
 
-    public void setAuthorities(List<Role> authorities) {
+    public void setAuthorities(List<GrantedAuthority> authorities) {
         this.authorities = authorities;
     }
 

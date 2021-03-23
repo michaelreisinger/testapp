@@ -23,6 +23,11 @@ public class TodoListController {
         this.todoListService = todoListServiceImpl;
     }
 
+    @GetMapping("/test")
+    public String test() {
+        return todoListService.test();
+    }
+
     @PostMapping( "/new")
     public ResponseEntity<TodoItemDTO> createNewTodoItem (@RequestBody String task) {
         HttpHeaders headers = new HttpHeaders();
