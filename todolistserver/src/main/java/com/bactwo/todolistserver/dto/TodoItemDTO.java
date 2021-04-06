@@ -4,7 +4,7 @@ import java.time.LocalDate;
 
 public class TodoItemDTO {
 
-    private Long todoITemId;
+    private Long todoItemId;
 
     private String task;
 
@@ -16,21 +16,21 @@ public class TodoItemDTO {
 
     public TodoItemDTO() { }
 
-    public TodoItemDTO(Long todoITemId, String task, boolean isCompleted,
+    public TodoItemDTO(Long todoItemId, String task, boolean isCompleted,
                        LocalDate dateOfTaskCreation, LocalDate dateOfTaskCompletion) {
-        this.todoITemId = todoITemId;
+        this.todoItemId = todoItemId;
         this.task = task;
         this.isCompleted = isCompleted;
         this.dateOfTaskCreation = dateOfTaskCreation;
         this.dateOfTaskCompletion = dateOfTaskCompletion;
     }
 
-    public Long getTodoITemId() {
-        return todoITemId;
+    public Long getTodoItemId() {
+        return todoItemId;
     }
 
-    public void setTodoITemId(Long todoITemId) {
-        this.todoITemId = todoITemId;
+    public void setTodoItemId(Long todoItemId) {
+        this.todoItemId = todoItemId;
     }
 
     public String getTask() {

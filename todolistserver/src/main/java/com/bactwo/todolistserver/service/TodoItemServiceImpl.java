@@ -71,8 +71,9 @@ public class TodoItemServiceImpl implements TodoItemService {
         try {
             TodoItem todoItem = todoItemRepository.findById(id)
                     .orElseThrow();
-            todoItem.setCompleted(true);
-            todoItem.setDateOfTaskCompletion(LocalDate.now());
+            todoItem.setCompleted(!todoItem.isCompleted());
+            if(todoItem.getDateOfTaskCompletion() == null) todoItem.setDateOfTaskCompletion(LocalDate.now());
+            else todoItem.setDateOfTaskCompletion(null);
             todoItemRepository.save(todoItem);
             return true;
         } catch (Exception e) {
@@ -84,7 +85,7 @@ public class TodoItemServiceImpl implements TodoItemService {
     @Override
     public boolean updateTodoItemTask(TodoItemDTO todoItemDTO) {
         try {
-            TodoItem todoItem = todoItemRepository.findById(todoItemDTO.getTodoITemId())
+            TodoItem todoItem = todoItemRepository.findById(todoItemDTO.getTodoItemId())
                     .orElseThrow();
             todoItem.setTask(todoItemDTO.getTask());
             todoItemRepository.save(todoItem);

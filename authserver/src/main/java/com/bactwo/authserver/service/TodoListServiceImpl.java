@@ -2,15 +2,14 @@ package com.bactwo.authserver.service;
 
 import com.bactwo.authserver.client.ResourceAPI;
 import com.bactwo.authserver.client.ResourceAPIImpl;
-import com.bactwo.authserver.dto.ListOfTodoItemsDTO;
 import com.bactwo.authserver.dto.TodoItemDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import java.util.Arrays;
 import java.util.List;
-import java.util.Objects;
 
 @Service
 public class TodoListServiceImpl implements TodoListService {
@@ -49,9 +48,8 @@ public class TodoListServiceImpl implements TodoListService {
     @Override
     public List<TodoItemDTO> getAllTodoItems () throws Exception {
         String path = "/all";
-        ResponseEntity<ListOfTodoItemsDTO> response = resourceAPI.getRemoteEntity(resourceLocation, path,
-                ListOfTodoItemsDTO.class);
-        return  Objects.requireNonNull(response.getBody()).getTodoItemDTOList();
+        List<TodoItemDTO> todoItemDTOList = Arrays.asList(resourceAPI.getRemoteListOfTodos(resourceLocation, path).getBody());
+        return todoItemDTOList;
     }
 
     @Override

@@ -1,5 +1,6 @@
 package com.bactwo.authserver.client;
 
+import com.bactwo.authserver.dto.TodoItemDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.*;
 import org.springframework.stereotype.Component;
@@ -53,5 +54,24 @@ public class ResourceAPIImpl implements ResourceAPI {
                 .toUri();
         return restTemplate.getForEntity(builder, responseClass);
     }
+
+    @Override
+    public ResponseEntity<TodoItemDTO[]> getRemoteListOfTodos(String baseUrl, String path) {
+        URI builder = UriComponentsBuilder.fromHttpUrl(baseUrl)
+                .path(path)
+                .build()
+                .toUri();
+        return restTemplate.getForEntity(builder, TodoItemDTO[].class);
+    }
+
+    /*
+    public ResponseEntity<Object[]> getRemoteListOfObjects(String baseUrl, String path) {
+        URI builder = UriComponentsBuilder.fromHttpUrl(baseUrl)
+                .path(path)
+                .build()
+                .toUri();
+        return restTemplate.getForEntity(builder, Object[].class);
+    }
+    */
 
 }

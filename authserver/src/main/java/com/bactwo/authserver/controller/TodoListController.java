@@ -7,13 +7,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+
 
 import java.util.Arrays;
 import java.util.List;
 
 @RestController
-@RequestMapping("/user/todolist")
+@CrossOrigin(origins = "http://localhost:4200", allowedHeaders = "*")
+@RequestMapping("/todo-api/v1")
 public class TodoListController {
 
     private final TodoListService todoListService;
@@ -21,11 +24,6 @@ public class TodoListController {
     @Autowired
     public TodoListController( TodoListServiceImpl todoListServiceImpl) {
         this.todoListService = todoListServiceImpl;
-    }
-
-    @GetMapping("/test")
-    public String test() {
-        return todoListService.test();
     }
 
     @PostMapping( "/new")

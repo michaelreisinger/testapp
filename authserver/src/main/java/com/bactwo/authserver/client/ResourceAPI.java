@@ -1,5 +1,6 @@
 package com.bactwo.authserver.client;
 
+import com.bactwo.authserver.dto.TodoItemDTO;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
 
@@ -14,5 +15,7 @@ public interface ResourceAPI {
                                                      Class<T> responseType);
 
     <T> ResponseEntity<T> getRemoteEntity (String baseUrl, String path, Class<T> responseClass);
+
+    ResponseEntity<TodoItemDTO[]> getRemoteListOfTodos (String baseUrl, String path);
 
 }
