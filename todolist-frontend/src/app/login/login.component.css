@@ -1,0 +1,48 @@
+/* Bordered form */
+form {
+    border: 3px solid gray;
+    padding: 8px;
+  }
+  
+
+  label {
+    padding: 2px;
+    margin-left: 1px;
+    margin-top: 1px;
+    background-color: lightgray;
+  }
+
+  /* Full-width inputs */
+  input[type=text], input[type=password] {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+  }
+  
+  /* Add a hover effect for buttons */
+  button:hover {
+    opacity: 0.8;
+  }
+  
+  /* Extra style for the cancel button (red) */
+  .btn-success {
+    padding: 10px;
+    margin: 1em;
+    background-color: #FE4880;;
+    width: 70%;
+    align-self: center;
+    cursor: pointer;
+    border: auto;
+  }
+  
+  .login {
+      margin: 2rem;
+      display: block;
+      float: left;
+      align-self: stretch;
+  }
+
+  
