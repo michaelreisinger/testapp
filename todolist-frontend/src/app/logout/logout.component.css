@@ -1,8 +1,10 @@
 .logout {
     margin: 2rem;
     padding: 1rem;
-    background-color: lightgray;
-}
+    text-align: center;   
+    border: 5px solid darkgray;
+    background-color: #FE4880;
+	color: white;}
 
 .text {
     padding: 1rem;
@@ -11,20 +13,7 @@
     float: left;
     align-self: center;
     align-content: center;
-}
-
-h1 {
-    align-content: center;
+    border: 5px solid darkgray;
     background-color: #FE4880;
-	color: lightgray;
-}
-p {
-    background-color: #FE4880;
-	color: lightgray;
-    align-content: center;
-
-}
-
-footer {
-    background-color: lightgray;
+	color: white;
 }

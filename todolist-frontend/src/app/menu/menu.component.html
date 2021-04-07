@@ -1,9 +1,11 @@
 <header>
-    <nav class="navbar navbar-expand-md navbar-dark bg-dark">
-        <ul>
-            <li class="logout-submit">
-                <a *ngIf="isLoggedIn" class="nav-link" href="/logout" (click)=handleLogout()>Logout</a>
-            </li>
-        </ul>
+    <h1>Todolist App</h1>
+    <div class="description">
+        <h4>- Enter a new Todo Task and submit it into the database via the Add-Button</h4>
+        <h4>- Delete a task from the database with the corresponding Delete-Button</h4>
+        <h4>- Toggle the state of completion by clicking on the task description (completed -> task is crossed out)</h4>
+    </div>
+    <nav>
+        <button (click)="handleLogout()" class="btn-success">Logout</button>
     </nav>
   </header>

@@ -1,7 +1,9 @@
 /* Bordered form */
 form {
-    border: 3px solid gray;
+    border: 5px solid darkgray;
     padding: 8px;
+    max-width: 30rem;
+    display: block;
   }
   
 
@@ -31,18 +33,31 @@ form {
   .btn-success {
     padding: 10px;
     margin: 1em;
-    background-color: #FE4880;;
-    width: 70%;
+    background-color: #FE4880;
+    color: white;
+    width: 40%;
+    min-width: 4rem;
     align-self: center;
     cursor: pointer;
     border: auto;
   }
   
   .login {
-      margin: 2rem;
+      margin:  2rem 4rem;
       display: block;
-      float: left;
-      align-self: stretch;
+      max-width: 28%;
+      min-width: 20rem;
   }
+
+  h1, h2 {
+    padding: 10px;
+    margin: 1rem 1rem;
+    margin-right: 2rem;
+    min-width: 4rem;
+    background-color: #FE4880;
+    color: white;
+    border: 5px solid darkgray;
+    text-align: center;
+    }
 
   

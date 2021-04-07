@@ -32,11 +32,6 @@ export class TodosComponent implements OnInit {
   }
 
   toggleDone (todo: Todo, id: number) {
-    /*this.todos.map((v, i) => {
-      if (i == id) v.completed = !v.completed;
-      return v;
-    })
-    */
     this.todosService.toggleTodoComplete(todo, id)
     .subscribe(data => {
       console.log(data);
@@ -57,7 +52,8 @@ export class TodosComponent implements OnInit {
     .subscribe(data => {
       console.log(data);
       this.refreshTodos();
-    })
+    });
+    this.inputTodo = "";
   }
 
 }

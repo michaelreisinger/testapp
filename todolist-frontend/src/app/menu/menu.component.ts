@@ -22,6 +22,7 @@ export class MenuComponent implements OnInit {
 
   handleLogout() {
     this.authenticationService.logout();
+    this.router.navigateByUrl('/logout');
   }
 
 }
