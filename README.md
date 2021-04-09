@@ -3,8 +3,8 @@ Todolist App
 - Enter new Todos
 - Add them via button
 - Delete them via button
-- Toggle state of completion by crossing out the task description
------------------------------------------------------------------
+- Toggle state of completion by crossing out task description
+-------------------------------------------------------------
 - Frontend with Angular
 - Backend: 
             - First Spring Boot App with basic auth against Postgres DB and routing to the second App
