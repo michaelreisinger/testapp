@@ -15,7 +15,7 @@ import java.util.Arrays;
 import java.util.List;
 
 @RestController
-@CrossOrigin(origins = "http://localhost:4200", allowedHeaders = "*")
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 @RequestMapping("/todo-api/v1")
 public class TodoListController {
 
@@ -37,6 +37,16 @@ public class TodoListController {
             System.out.println(Arrays.toString(e.getStackTrace()));
             return new ResponseEntity<>(null, headers, HttpStatus.BAD_REQUEST);
         }
+    }
+
+    @GetMapping("/test")
+    public String test () {
+        return "test response from first service";
+    }
+
+    @GetMapping("/test2")
+    public String test2 () {
+        return todoListService.test();
     }
 
     @GetMapping("/todo/{id}")

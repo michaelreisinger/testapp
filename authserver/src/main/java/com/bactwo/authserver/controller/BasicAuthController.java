@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@CrossOrigin(origins = "http://localhost:4200" )
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 @RequestMapping("/todo-api/v1")
 public class BasicAuthController {
     @GetMapping("/basicauth")
