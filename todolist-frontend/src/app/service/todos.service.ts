@@ -11,7 +11,7 @@ export class TodosService {
 
   constructor(private http: HttpClient, private authenticationService: AuthenticationService) { }
 
-  API_URL = "http://localhost:8082/todo-api/v1";
+  API_URL = "http://localhost:8080/login/todo-api/v1";
 
   retrieveAllTodos() {
     return this.http.get<Todo[]>(`${this.API_URL}/all`);    

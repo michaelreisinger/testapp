@@ -12,7 +12,7 @@ export class AuthenticationService {
 
    USER_NAME_SESSION_ATTRIBUTE_NAME = 'authenticatedUser';
 
-   API_URL = "http://localhost:8082/todo-api/v1";
+   API_URL = "http://localhost:8080/login/todo-api/v1";
 
    API_URL_AUTH = this.API_URL + "/basicauth";
 
